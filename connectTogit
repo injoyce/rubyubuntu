@@ -24,3 +24,15 @@ Githubに登録する
 check connect or not!
 $ ssh -T git@github.com
 
+3.use MySql
+rails new myapp -d mysql
+
+database.yml
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
+  socket: /var/lib/mysql/mysql.sock
+  
+  $echo DATABASE_URL mysql2://productionuser:productionpass@localhost/production_database
+  
+
