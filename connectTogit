@@ -1,0 +1,26 @@
+1. intall ruby 2.0.0 on ubuntu 16.04
+link to :https://gorails.com/setup/ubuntu/16.04
+
+Intalling
+sudo apt-get update
+sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev
+
+2.connect ruby to your github
+git config --global color.ui true
+git config --global user.name "YOUR NAME"
+git config --global user.email "YOUR@EMAIL.com"
+ssh-keygen -t rsa -b 4096 -C "YOUR@EMAIL.com"
+
+Take the newly generated key and add to your github account.
+
+cat ~/.ssh/id_rsa.pub
+id_rsa 秘密鍵　id_rsa.pub 公開鍵
+
+秘密鍵・公開鍵のペアを生成する
+$ ssh-keygen -t rsa -C "your_email@example.com"
+
+Githubに登録する
+
+check connect or not!
+$ ssh -T git@github.com
+
