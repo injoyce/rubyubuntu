@@ -1,0 +1,10 @@
+1.Railsアプリを新規作成しサーバーを起動する。
+$ rails new blog
+$ cd blog
+$ rails server  ## サーバー起動
+
+2.DB 起動、停止、再起動
+
+$ sudo service mysql start
+$ sudo service mysql stop
+$ sudo service mysql restart
