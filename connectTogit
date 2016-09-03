@@ -35,4 +35,96 @@ production:
   
   $echo DATABASE_URL mysql2://productionuser:productionpass@localhost/production_database
   
+環境
+
+    Ubuntu 12.04 LTS
+    MySQL 5.5.37
+
+mysqlをインストール
+
+まずはインストールされるバージョンを確認
+まだ5.6は登録されていないみたいですね。
+
+$ sudo apt-get update
+$ apt-cache show mysql-server | grep Version
+Version: 5.5.37-0ubuntu0.12.04.1
+Version: 5.5.22-0ubuntu1
+
+aptでインストール
+
+$ sudo apt-get install mysql-server
+$ mysql --version
+mysql  Ver 14.14 Distrib 5.5.37, for debian-linux-gnu (x86_64) using readline 6.2
+
+設定
+
+設定ファイルはバックアップしておきましょう
+
+$ cd /etc/mysql
+$ cp my.cnf my.cnf.org
+
+文字コードなどを設定
+
+$ sudo vi my.cnf
+
+下記を追記
+
+[client]
+default-character-set = utf8
+
+[mysqld]
+skip-character-set-client-handshake
+character-set-server  = utf8
+collation-server      = utf8_general_ci
+init-connect          = SET NAMES utf8
+
+設定を反映させるためmysqlを再起動
+
+$ sudo service mysql restart
+
+mysqlにログイン
+
+$ mysql -u root -p
+
+ステータスをチェック
+
+mysql> status
+--------------
+mysql  Ver 14.14 Distrib 5.5.37, for debian-linux-gnu (x86_64) using readline 6.2
+
+Connection id:          37
+Current database:    
+Current user:           root@localhost
+SSL:                    Not in use
+Current pager:          stdout
+Using outfile:          ''
+Using delimiter:        ;
+Server version:         5.5.37-0ubuntu0.12.04.1 (Ubuntu)
+Protocol version:       10
+Connection:             Localhost via UNIX socket
+Server characterset:    utf8
+Db     characterset:    utf8
+Client characterset:    utf8
+Conn.  characterset:    utf8
+UNIX socket:            /var/run/mysqld/mysqld.sock
+Uptime:                 19 min 17 sec
+
+Threads: 1  Questions: 112  Slow queries: 0  Opens: 171  Flush tables: 1  Open tables: 41  Queries per second avg: 0.096
+--------------
+
+起動、停止、再起動
+
+$ sudo service mysql start
+$ sudo service mysql stop
+$ sudo service mysql restart
+
+プロセスの確認
+
+$ ps aux | grep mysqld
+mysql    1461  0.0  4.2 492564 42912 ?        Ssl  06:40   0:00 /usr/sbin/mysqld
+hoge     3372  0.0  0.0  14572   948 pts/0    S+   06:51   0:00 grep --color=auto mysqld
+
+MySQLをGUIで管理
+
+$ sudo apt-get install mysql-workbench
 
